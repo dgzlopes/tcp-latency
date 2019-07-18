@@ -1,7 +1,7 @@
 # tcp-latency
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tcp-latency.svg)
 ![PyPI](https://img.shields.io/pypi/v/tcp-latency.svg)
-![GitHub](https://img.shields.io/github/license/dgzlopes/tcp-latency.svg)
+![PyPI - License](https://img.shields.io/pypi/l/tcp-latency.svg)
 ## About
 `tcp-latency` provides an easy way to measure latency using TCP.
 
