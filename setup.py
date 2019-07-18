@@ -6,8 +6,8 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(
-    name='tcp-latency',
-    version='0.0.1',
+    name='tcp-lat',
+    version='0.0.2',
     description='Meassure latency using TCP.',
     long_description=long_description,
     long_description_content_type='text/markdown',
