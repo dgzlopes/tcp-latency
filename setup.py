@@ -19,6 +19,7 @@ setup(
     author='Daniel Gonzalez Lopes',
     author_email='danielgonzalezlopes@gmail.com',
     packages=setuptools.find_packages(),
+    python_requires='>=3.6',
     entry_points={
         'console_scripts': [
             'tcp-latency = tcp_latency.tcp_latency:_main',
