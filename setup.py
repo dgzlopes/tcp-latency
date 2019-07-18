@@ -14,7 +14,10 @@ setup(
     url='https://github.com/dgzlopes/tcp-latency',
     license='MIT',
     classifiers=[
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: MIT License',
+        'Topic :: System :: Networking',
     ],
     author='Daniel Gonzalez Lopes',
     author_email='danielgonzalezlopes@gmail.com',
