@@ -14,6 +14,9 @@ setup(
     url='https://github.com/dgzlopes/tcp-latency',
     license='MIT',
     classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: MIT License',
