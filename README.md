@@ -5,15 +5,15 @@
 ## About
 `tcp-latency` provides an easy way to measure latency using TCP.
 
-Inspired by other [similar tools](#similar-tools), `tcp-latency` comes from the need of running network diagnosis/troubleshooting tasks with Python on serverless infraestructure (as many providers don't include ping/ICMP support) but should work too in any other enviroment with Python>=36.
+Inspired by other [similar tools](#similar-tools), `tcp-latency` comes from the need of running network diagnosis/troubleshooting tasks with Python on serverless infrastructure (as many providers don't include ping/ICMP support) but should work too in any other environment with Python>=36.
 ## Features
-- Runs as command line tool or inside your code as a module.
-- Custom parameters for port, runs, timeout and wait time between runs.
+- Runs as a command-line tool or inside your code as a module.
+- Custom parameters for a port, runs, timeout and wait time between runs.
 - IPv4 (e.g 52.26.14.11) and domain (e.g google.com) host support.
-- Human readable output when runned as command line tool.
+- Human readable output when running as a command-line tool.
 - Small and extensible.
 ## Usage
-`tcp-latency` can be used both as a module and as an standalone script.
+`tcp-latency` can be used both as a module and as a standalone script.
 
 ### Module
 ```
@@ -23,8 +23,8 @@ Inspired by other [similar tools](#similar-tools), `tcp-latency` comes from the 
 >>> meassure_latency(host='52.26.14.11', port=80, runs=10, timeout=2.5)
 [433.82, 409.21, 409.25, 307.09, 306.64, 409.45, 306.58, 306.93, 409.25, 409.26]
 ```
-Note: If ommited, `meassure_latency()` arguments use the same defaults that command line mode.
-### Command line
+Note: If omitted, `meassure_latency()` arguments use the same defaults that command line mode.
+### Command-line
 ```
 $ tcplatency -h
 usage: tcp-latency [-h] [-p [p]] [-t [t]] [-r [r]] [-w [w]] h
@@ -71,10 +71,10 @@ pip install tcp-latency
 4. Send a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork) and bug [me](https://github.com/dgzlopes) until it gets merged and published.
 
 Some things that would be great to have:
-- Add at the end of human_output stadistics (ping-like).
+- Add at the end of human_output statistics (ping-like).
 - Add documentation (Sphinx?).
 - Add Ipv6 support.
-- Add support for machine readable output (json?xml?).
+- Add support for machine-readable output (JSON?XML?).
 - Add automated testing and releases with CircleCI.
 - Add codecov.
 - Add to README.md a list of alternatives to tcp-latency.
