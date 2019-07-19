@@ -13,6 +13,7 @@ clean:
 
 .PHONY: publish
 publish:
+	rm -fr build dist .egg tcp_latency.egg-info
 	pip install wheel twine
 	python3 setup.py sdist bdist_wheel
 	twine upload dist/*
