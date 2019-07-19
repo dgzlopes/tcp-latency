@@ -17,19 +17,19 @@ Inspired by other [similar tools](#similar-tools), `tcp-latency` comes from the 
 
 ### Module
 ```
->>> from tcp_latency import meassure_latency
->>> meassure_latency(host='google.com')
+>>> from tcp_latency import measure_latency
+>>> measure_latency(host='google.com')
 [34.57]
->>> meassure_latency(host='52.26.14.11', port=80, runs=10, timeout=2.5)
+>>> measure_latency(host='52.26.14.11', port=80, runs=10, timeout=2.5)
 [433.82, 409.21, 409.25, 307.09, 306.64, 409.45, 306.58, 306.93, 409.25, 409.26]
 ```
-Note: If omitted, `meassure_latency()` arguments use the same defaults that command line mode.
+Note: If omitted, `measure_latency()` arguments use the same defaults that command line mode.
 ### Command-line
 ```
 $ tcplatency -h
 usage: tcp-latency [-h] [-p [p]] [-t [t]] [-r [r]] [-w [w]] h
 
-Meassure latency using TCP.
+Measure latency using TCP.
 
 positional arguments:
   host

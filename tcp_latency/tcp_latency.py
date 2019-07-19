@@ -10,7 +10,7 @@ from typing import Optional
 def _parse_arguments():
     '''Argument parsing for the console_script'''
     parser = argparse.ArgumentParser(
-        description='Meassure latency using TCP.',
+        description='Measure latency using TCP.',
     )
     parser.add_argument(
         'host',
@@ -56,7 +56,7 @@ def _parse_arguments():
     return parser.parse_args()
 
 
-def meassure_latency(
+def measure_latency(
     host: str,
     port: int = 443,
     timeout: float = 5,
@@ -134,7 +134,7 @@ def _human_output(host: str, port: int, timeout: int, latency_point: float, seq_
 
 def _main():
     args = _parse_arguments()
-    meassure_latency(
+    measure_latency(
         host=args.host,
         port=args.port,
         timeout=args.timeout,
