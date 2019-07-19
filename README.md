@@ -23,7 +23,7 @@ Inspired by other [similar tools](#similar-tools), `tcp-latency` comes from the 
 >>> measure_latency(host='52.26.14.11', port=80, runs=10, timeout=2.5)
 [433.82, 409.21, 409.25, 307.09, 306.64, 409.45, 306.58, 306.93, 409.25, 409.26]
 ```
-Note: If omitted, `measure_latency()` arguments use the same defaults that command line mode.
+Note: If omitted, `measure_latency()` arguments use the same defaults that command-line mode.
 ### Command-line
 ```
 $ tcplatency -h
