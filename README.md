@@ -2,6 +2,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tcp-latency.svg)
 ![PyPI](https://img.shields.io/pypi/v/tcp-latency.svg)
 ![PyPI - License](https://img.shields.io/pypi/l/tcp-latency.svg)
+[![Build Status](https://travis-ci.org/dgzlopes/tcp-latency.svg?branch=master)](https://travis-ci.org/dgzlopes/tcp-latency)
 ## About
 `tcp-latency` provides an easy way to measure latency using TCP.
 
@@ -75,9 +76,8 @@ Some things that would be great to have:
 - Add documentation (Sphinx?).
 - Add Ipv6 support.
 - Add support for machine-readable output (JSON?XML?).
-- Add automated testing and releases with CircleCI.
+- Add automated releases with TravisCI.
 - Add codecov.
-- Add to README.md a list of alternatives to tcp-latency.
 - Improve formatting in human_output to feel more like ping.
 - Improve test suite.
 - Improve `How to contribute` information (pyenv, tox, pre-commit...)
