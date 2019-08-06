@@ -1,0 +1,14 @@
+language: python
+matrix:
+    include:
+        - env: TOXENV=py36
+          python: 3.6
+        - env: TOXENV=py37
+          python: 3.7
+          dist: xenial  # required for Python >= 3.7 (travis-ci/travis-ci#9069)
+install:
+    - pip install tox
+script: make test
+cache:
+    directories:
+        - $HOME/.cache/pre-commit
