@@ -77,10 +77,15 @@ def measure_latency(
             host=host, port=port, timeout=timeout,
         )
         if human_output:
+            if i == 0:
+                print('tcp-latency {}'.format(host))
             _human_output(
                 host=host, port=port, timeout=timeout,
                 latency_point=last_latency_point, seq_number=i,
             )
+            if i == len(range(runs))-1:
+                print('--- {} tcp-latency statistics ---'.format(host))
+                print('{} packets transmitted'.format(i+1))
 
         list_of_latency_points.append(last_latency_point)
 

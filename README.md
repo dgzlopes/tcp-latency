@@ -45,19 +45,28 @@ optional arguments:
 ```
 ```
 $ tcplatency google.com
+tcp-latency google.com
 google.com: tcp seq=0 port=443 timeout=5 time=32.91 ms
 google.com: tcp seq=1 port=443 timeout=5 time=14.1 ms
 google.com: tcp seq=2 port=443 timeout=5 time=16.26 ms
 google.com: tcp seq=3 port=443 timeout=5 time=16.35 ms
 google.com: tcp seq=4 port=443 timeout=5 time=15.63 ms
+--- google.com tcp-latency statistics ---
+5 packets transmitted
 
 $ tcplatency 52.26.14.11 --port 80 --runs 3 --wait 0.5
+tcp-latency 52.26.14.11
 52.26.14.11: tcp seq=0 port=80 timeout=5 time=269.45 ms
 52.26.14.11: tcp seq=1 port=80 timeout=5 time=409.2 ms
 52.26.14.11: tcp seq=2 port=80 timeout=5 time=409.14 ms
+--- 52.26.14.11 tcp-latency statistics ---
+3 packets transmitted
 
 $ tcp-latency google.com -r 1
+tcp-latency google.com
 google.com: tcp seq=0 port=443 timeout=5 time=34.36 ms
+--- google.com tcp-latency statistics ---
+1 packets transmitted
 ```
 
 ## Installation
