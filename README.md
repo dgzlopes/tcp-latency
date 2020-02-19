@@ -3,7 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/tcp-latency.svg)](https://pypi.org/project/tcp-latency/)
 [![PyPI - License](https://img.shields.io/pypi/l/tcp-latency.svg)](https://github.com/dgzlopes/tcp-latency/blob/master/LICENSE.md)
 [![Build Status](https://travis-ci.org/dgzlopes/tcp-latency.svg?branch=master)](https://travis-ci.org/dgzlopes/tcp-latency)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/tcp-latency)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/tcp-latency)
 ## About
 `tcp-latency` provides an easy way to measure latency using TCP.
 
