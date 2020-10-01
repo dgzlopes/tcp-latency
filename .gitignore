@@ -8,6 +8,7 @@
 /venv*
 /tmp
 /build
+/act
 
 .*ignore
 !.gitignore
