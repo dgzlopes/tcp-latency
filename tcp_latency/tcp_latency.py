@@ -93,7 +93,7 @@ def measure_latency(
                 times = [point for point in latency_points if point]
                 if times:
                     print(
-                        f'rtt min/avg/max = {min(times, default=0)}/{mean(times)}/{max(times, default=0)} ms',   # noqa: E501
+                        f'rtt min/avg/max = {min(times)}/{mean(times)}/{max(times)} ms',   # noqa: E501
                     )
 
     return latency_points
