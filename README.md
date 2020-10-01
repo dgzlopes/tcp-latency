@@ -44,6 +44,7 @@ optional arguments:
                         (seconds, float, default: 5)
   -r [r], --runs [r]    number of latency points (int, default: 5)
   -w [w], --wait [w]    between each run (seconds, float, default: 1)
+  -f [f], --format [f]  prints data in specified format. Json and xml available
 ```
 ```
 $ tcp-latency google.com

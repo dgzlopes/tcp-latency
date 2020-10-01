@@ -5,6 +5,9 @@ from statistics import mean
 from time import sleep
 from time import time
 from typing import Optional
+from json import dumps
+import xml.etree.ElementTree as ET
+from xml.dom.minidom import parseString
 
 
 def _parse_arguments():
@@ -52,18 +55,27 @@ def _parse_arguments():
         type=float,
         help='between each run (seconds, %(type)s, default: %(default)s)',
     )
-
+    parser.add_argument(
+        '-f',
+        '--format',
+        metavar='f',
+        nargs='?',
+        default=None,
+        type=str,
+        help='prints data in specified format. Json and xml available',
+    )
     return parser.parse_args()
 
 
 def measure_latency(
-    host: str,
-    port: int = 443,
-    timeout: float = 5,
-    runs: int = 1,
-    wait:
-    float = 1,
-    human_output: bool = False,
+        host: str,
+        port: int = 443,
+        timeout: float = 5,
+        runs: int = 1,
+        wait:
+        float = 1,
+        human_output: bool = False,
+        format: str = None
 ) -> list:
     '''
     :rtype: list
@@ -83,16 +95,18 @@ def measure_latency(
                 host=host, port=port, timeout=timeout,
                 latency_point=last_latency_point, seq_number=i,
             )
-            if i == len(range(runs))-1:
+            if i == len(range(runs)) - 1:
                 print(f'--- {host} tcp-latency statistics ---')
-                print(f'{i+1} packets transmitted')
+                print(f'{i + 1} packets transmitted')
                 if latency_points:
                     print(
-                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',   # noqa: E501
+                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',
+                        # noqa: E501
                     )
-
+        if format:
+            _machine_output(format=format, host=host, port=port, timeout=timeout, latency_point=last_latency_point,
+                            seq_number=i)
         latency_points.append(last_latency_point)
-
     return latency_points
 
 
@@ -138,15 +152,34 @@ def _human_output(host: str, port: int, timeout: int, latency_point: float, seq_
         print(f'{host}: tcp seq={seq_number} port={port} timeout={timeout} failed')
 
 
+def _machine_output(format, **kwargs):
+    '''converts data to specified format for the console'''
+    # In case latency_point is None
+    point = kwargs['latency_point']
+    kwargs['latency_point'] = f'{round(point, 2)} ms' if point else 'failed'
+    if format == 'json':
+        print(dumps(kwargs))
+    elif format == 'xml':
+        parent = ET.Element('tcp-latency')
+        for key, value in kwargs.items():
+            sub = ET.SubElement(parent, key)
+            sub.text = str(value)
+        print(parseString(ET.tostring(parent)).toprettyxml())
+    else:
+        raise ValueError('specified format is not supported')
+
+
 def _main():
     args = _parse_arguments()
+    human_output = False if args.format else True
     measure_latency(
         host=args.host,
         port=args.port,
         timeout=args.timeout,
         runs=args.runs,
-        human_output=True,
+        human_output=human_output,
         wait=args.wait,
+        format=args.format
     )
 
 
