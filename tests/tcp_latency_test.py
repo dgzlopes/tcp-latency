@@ -32,9 +32,26 @@ def test_tcpLatency_valid_list_return():
         assert isinstance(element, float) or None
 
 
-def test_statistics():
+def test_generate_statistics():
     latency_points = [1.0, None, 1.0, 1.0, None]
 
     statistics_string = generate_statistics(latency_points)
 
     assert statistics_string == '5 packets transmitted, 3 packets received, 40.0% packet loss'
+
+
+def test_generate_statistics_with_100_loss():
+    latency_points = [None, None, None, None, None]
+
+    statistics_string = generate_statistics(latency_points)
+
+    assert statistics_string == '5 packets transmitted, 0 packets received, 100.0% packet loss'
+
+
+def test_generate_statistics_with_0_loss():
+    latency_points = [1.0, 2.0, 3.0, 4.0, 5.0]
+
+    statistics_string = generate_statistics(latency_points)
+
+    assert statistics_string == '5 packets transmitted, 5 packets received, 0.0% packet loss'
+
