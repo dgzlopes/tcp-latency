@@ -13,6 +13,7 @@ Inspired by other [similar tools](#similar-tools), `tcp-latency` comes from the 
 - Custom parameters for a port, runs, timeout and wait time between runs.
 - IPv4 (e.g 52.26.14.11) and domain (e.g google.com) host support.
 - Human readable output when running as a command-line tool.
+- No external dependencies.
 - Small and extensible.
 ## Usage
 `tcp-latency` can be used both as a module and as a standalone script.

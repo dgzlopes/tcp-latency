@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import argparse
 import socket
-import time
 from statistics import mean
-from timeit import default_timer as timer
+from time import sleep
+from time import time
 from typing import Optional
 
 
@@ -72,7 +72,7 @@ def measure_latency(
     latency_points = []
 
     for i in range(runs):
-        time.sleep(wait)
+        sleep(wait)
         last_latency_point = latency_point(
             host=host, port=port, timeout=timeout,
         )
@@ -106,7 +106,7 @@ def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[fl
     s.settimeout(timeout)
 
     # Start a timer
-    s_start = timer()
+    s_start = time()
 
     # Try to Connect
     try:
@@ -122,8 +122,7 @@ def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[fl
         return None
 
     # Stop Timer
-    s_stop = timer()
-    s_runtime = '%.2f' % (1000 * (s_stop - s_start))
+    s_runtime = (time() - s_start) * 1000
 
     return float(s_runtime)
 

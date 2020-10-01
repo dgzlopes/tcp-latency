@@ -7,7 +7,7 @@ with open('README.md') as f:
 
 setup(
     name='tcp-latency',
-    version='0.0.9',
+    version='0.0.10',
     description='Measure latency using TCP.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -19,6 +19,7 @@ setup(
         'Natural Language :: English',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'License :: OSI Approved :: MIT License',
         'Topic :: System :: Networking',
     ],
