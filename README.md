@@ -42,26 +42,28 @@ optional arguments:
   -t [t], --timeout [t]
                         (seconds, float, default: 5)
   -r [r], --runs [r]    number of latency points (int, default: 5)
-  -w [w], --wait [w]    between each run (seconds, float, default: 0)
+  -w [w], --wait [w]    between each run (seconds, float, default: 1)
 ```
 ```
-$ tcplatency google.com
+$ tcp-latency google.com
 tcp-latency google.com
-google.com: tcp seq=0 port=443 timeout=5 time=32.91 ms
-google.com: tcp seq=1 port=443 timeout=5 time=14.1 ms
-google.com: tcp seq=2 port=443 timeout=5 time=16.26 ms
-google.com: tcp seq=3 port=443 timeout=5 time=16.35 ms
-google.com: tcp seq=4 port=443 timeout=5 time=15.63 ms
+google.com: tcp seq=0 port=443 timeout=5 time=15.16 ms
+google.com: tcp seq=1 port=443 timeout=5 time=15.63 ms
+google.com: tcp seq=2 port=443 timeout=5 time=14.86 ms
+google.com: tcp seq=3 port=443 timeout=5 time=14.76 ms
+google.com: tcp seq=4 port=443 timeout=5 time=14.59 ms
 --- google.com tcp-latency statistics ---
 5 packets transmitted
+rtt min/avg/max = 14.76/15.1025/15.63 ms
 
-$ tcplatency 52.26.14.11 --port 80 --runs 3 --wait 0.5
+$ tcp-latency 52.26.14.11 --port 80 --runs 3 --wait 0.5
 tcp-latency 52.26.14.11
-52.26.14.11: tcp seq=0 port=80 timeout=5 time=269.45 ms
-52.26.14.11: tcp seq=1 port=80 timeout=5 time=409.2 ms
-52.26.14.11: tcp seq=2 port=80 timeout=5 time=409.14 ms
+52.26.14.11: tcp seq=0 port=80 timeout=5 time=230.2 ms
+52.26.14.11: tcp seq=1 port=80 timeout=5 time=228.96 ms
+52.26.14.11: tcp seq=2 port=80 timeout=5 time=224.51 ms
 --- 52.26.14.11 tcp-latency statistics ---
 3 packets transmitted
+rtt min/avg/max = 228.96/229.57999999999998/230.2 ms
 
 $ tcp-latency google.com -r 1
 tcp-latency google.com
@@ -82,13 +84,10 @@ pip install tcp-latency
 4. Send a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork) and bug [me](https://github.com/dgzlopes) until it gets merged and published.
 
 Some things that would be great to have:
-- Add at the end of human_output statistics (ping-like).
-- Add documentation (Sphinx?).
-- Add Ipv6 support.
-- Add support for machine-readable output (JSON?XML?).
+- Add transmitted vs received statistics (e.g packet loss)
+- Add bytes information (ping-like)
+- Add support for machine-readable output (JSON,XML,YAML).
 - Add automated releases with TravisCI.
-- Add codecov.
-- Improve formatting in human_output to feel more like ping.
 - Improve test suite.
 - Improve `How to contribute` information (pyenv, tox, pre-commit...)
 
