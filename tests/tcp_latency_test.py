@@ -1,5 +1,4 @@
-from tcp_latency import latency_point
-from tcp_latency import measure_latency
+from tcp_latency import latency_point, measure_latency, generate_statistics
 
 
 def test_latencyPoint_unreachable_host():
@@ -31,3 +30,11 @@ def test_tcpLatency_valid_list_return():
 
     for element in latency_run:
         assert isinstance(element, float) or None
+
+
+def test_statistics():
+    latency_points = [1.0, None, 1.0, 1.0, None]
+
+    statistics_string = generate_statistics(latency_points)
+
+    assert statistics_string == '5 packets transmitted, 3 packets received, 40.0% packet loss'
