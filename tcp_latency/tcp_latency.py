@@ -2,8 +2,8 @@
 import argparse
 import socket
 import time
+from statistics import mean
 from timeit import default_timer as timer
-
 from typing import Optional
 
 
@@ -48,7 +48,7 @@ def _parse_arguments():
         '--wait',
         metavar='w',
         nargs='?',
-        default=0,
+        default=1,
         type=float,
         help='between each run (seconds, %(type)s, default: %(default)s)',
     )
@@ -69,7 +69,7 @@ def measure_latency(
     :rtype: list
     Builds a list composed of latency_points
     '''
-    list_of_latency_points = []
+    latency_points = []
 
     for i in range(runs):
         time.sleep(wait)
@@ -84,12 +84,16 @@ def measure_latency(
                 latency_point=last_latency_point, seq_number=i,
             )
             if i == len(range(runs))-1:
-                print('--- {} tcp-latency statistics ---'.format(host))
-                print('{} packets transmitted'.format(i+1))
+                print(f'--- {host} tcp-latency statistics ---')
+                print(f'{i+1} packets transmitted')
+                if latency_points:
+                    print(
+                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',
+                    )
 
-        list_of_latency_points.append(last_latency_point)
+        latency_points.append(last_latency_point)
 
-    return list_of_latency_points
+    return latency_points
 
 
 def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[float]:
@@ -128,13 +132,11 @@ def _human_output(host: str, port: int, timeout: int, latency_point: float, seq_
     '''fstring based output for the console_script'''
     # In case latency_point is None
     if latency_point:
-        print('{}: tcp seq={} port={} timeout={} time={} ms'.format(
-            host, seq_number, port, timeout, latency_point,
-        ))
+        print(
+            f'{host}: tcp seq={seq_number} port={port} timeout={timeout} time={latency_point} ms',
+        )
     else:
-        print('{}: tcp seq={} port={} timeout={} failed'.format(
-            host, seq_number, port, timeout,
-        ))
+        print(f'{host}: tcp seq={seq_number} port={port} timeout={timeout} failed')
 
 
 def _main():
