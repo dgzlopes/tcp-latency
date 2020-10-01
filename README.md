@@ -95,4 +95,4 @@ Some things that would be great to have:
 ## Similar tools
 - [yantisj/tcpping](https://github.com/yantisj/tcpping)
 - [ipv6freely/tcpping](https://github.com/ipv6freely/tcpping)
-- [yahoo/serviceping](https://github.com/yantisj/tcpping)
+- [yahoo/serviceping](https://github.com/yahoo/serviceping)
