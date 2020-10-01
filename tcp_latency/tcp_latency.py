@@ -88,7 +88,7 @@ def measure_latency(
                 print(f'{i+1} packets transmitted')
                 if latency_points:
                     print(
-                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',
+                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',   # noqa: E501
                     )
 
         latency_points.append(last_latency_point)
