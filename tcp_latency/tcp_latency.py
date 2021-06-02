@@ -76,6 +76,8 @@ def measure_latency(
         last_latency_point = latency_point(
             host=host, port=port, timeout=timeout,
         )
+        latency_points.append(last_latency_point)
+
         if human_output:
             if i == 0:
                 print('tcp-latency {}'.format(host))
@@ -86,12 +88,11 @@ def measure_latency(
             if i == len(range(runs))-1:
                 print(f'--- {host} tcp-latency statistics ---')
                 print(f'{i+1} packets transmitted')
-                if latency_points:
+                received_points = [point for point in latency_points if point]
+                if received_points:
                     print(
-                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',   # noqa: E501
+                        f'rtt min/avg/max = {min(received_points)}/{mean(received_points)}/{max(received_points)} ms',   # noqa: E501
                     )
-
-        latency_points.append(last_latency_point)
 
     return latency_points
 
