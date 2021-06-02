@@ -70,12 +70,16 @@ def measure_latency(
     Builds a list composed of latency_points
     '''
     latency_points = []
+    packet_statistics = {'transmitted': 0, 'received': 0, 'success_percentage': 0, 'loss_percentage': 0, 'total_time': 0}
 
     for i in range(runs):
         sleep(wait)
         last_latency_point = latency_point(
             host=host, port=port, timeout=timeout,
         )
+
+        packet_statistics =calculate_packets_statistics(last_latency_point, packet_statistics, timeout)
+
         if human_output:
             if i == 0:
                 print('tcp-latency {}'.format(host))
@@ -86,6 +90,7 @@ def measure_latency(
             if i == len(range(runs))-1:
                 print(f'--- {host} tcp-latency statistics ---')
                 print(f'{i+1} packets transmitted')
+                show_packet_statistics(packet_statistics)
                 if latency_points:
                     print(
                         f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',   # noqa: E501
@@ -95,6 +100,32 @@ def measure_latency(
 
     return latency_points
 
+
+def calculate_packets_statistics(last_calculated_value: float, packet_statistics: dict, timeout: float) -> dict:
+    '''
+    :rtype: Returns the statistics dictionary
+    Calculate the packet statisctics
+    '''
+    if not packet_statistics:
+        packet_statistics = {'transmitted': 0, 'received': 0, 'success_percentage': 0, 'loss_percentage': 0, 'total_time': 0}
+
+    packet_statistics['transmitted'] += 1
+    if last_calculated_value:
+        packet_statistics['received'] += 1
+        packet_statistics['total_time'] += last_calculated_value
+    else:
+        packet_statistics['total_time'] += timeout
+    packet_statistics['success_percentage'] = packet_statistics['received'] * 100 / packet_statistics['transmitted']
+    packet_statistics['loss_percentage'] = 100 - packet_statistics['success_percentage']
+
+    return packet_statistics
+
+def show_packet_statistics(packet_statistics: dict):
+    '''
+    Prints the packets statistics
+    '''
+    if packet_statistics:
+        print (f' {packet_statistics["transmitted"]} packets transmitted, {packet_statistics["received"]} packets received, {packet_statistics["loss_percentage"]}% packet loss, time {packet_statistics["total_time"]}ms ')
 
 def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[float]:
     '''
