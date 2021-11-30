@@ -86,7 +86,9 @@ def measure_latency(
             if i == len(range(runs))-1:
                 print(f'--- {host} tcp-latency statistics ---')
                 if latency_points:
-                    print(f'{len(latency_points)} out of {i+1} packets transmitted successfully')
+                    print(
+                        f'{len(latency_points)} out of {i+1} packets transmitted successfully',
+                    )
                     print(
                         f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',   # noqa: E501
                     )
