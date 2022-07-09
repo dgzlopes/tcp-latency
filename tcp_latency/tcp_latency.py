@@ -107,7 +107,10 @@ def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[fl
     Calculate a latency point using sockets. If something bad happens the point returned is None
     '''
     # New Socket and Time out
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    if(socket.has_dualstack_ipv6()):
+        s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+    else:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(timeout)
 
     # Start a timer
