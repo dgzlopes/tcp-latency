@@ -1,13 +1,12 @@
-from distutils.core import setup
-
 import setuptools
+from distutils.core import setup
 
 with open('README.md') as f:
     long_description = f.read()
 
 setup(
     name='tcp-latency',
-    version='0.0.11',
+    version='0.0.12',
     description='Measure latency using TCP.',
     long_description=long_description,
     long_description_content_type='text/markdown',
