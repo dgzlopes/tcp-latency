@@ -2,8 +2,7 @@
 import argparse
 import socket
 from statistics import mean
-from time import sleep
-from time import time
+from time import sleep, monotonic
 from typing import Optional
 
 
@@ -57,13 +56,13 @@ def _parse_arguments():
 
 
 def measure_latency(
-    host: str,
-    port: int = 443,
-    timeout: float = 5,
-    runs: int = 1,
-    wait:
-    float = 1,
-    human_output: bool = False,
+        host: str,
+        port: int = 443,
+        timeout: float = 5,
+        runs: int = 1,
+        wait:
+        float = 1,
+        human_output: bool = False,
 ) -> list:
     '''
     :rtype: list
@@ -83,14 +82,15 @@ def measure_latency(
                 host=host, port=port, timeout=timeout,
                 latency_point=last_latency_point, seq_number=i,
             )
-            if i == len(range(runs))-1:
+            if i == len(range(runs)) - 1:
                 print(f'--- {host} tcp-latency statistics ---')
                 if latency_points:
                     print(
-                        f'{len(latency_points)} out of {i+1} packets transmitted successfully',
+                        f'{len(latency_points)} out of {i + 1} packets transmitted successfully',
                     )
                     print(
-                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',   # noqa: E501
+                        f'rtt min/avg/max = {min(latency_points)}/{mean(latency_points)}/{max(latency_points)} ms',
+                    # noqa: E501
                     )
                 else:
                     print(f'All {runs} transmissions failed')
@@ -111,7 +111,7 @@ def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[fl
     s.settimeout(timeout)
 
     # Start a timer
-    s_start = time()
+    s_start = monotonic()
 
     # Try to Connect
     try:
@@ -127,7 +127,7 @@ def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[fl
         return None
 
     # Stop Timer
-    s_runtime = (time() - s_start) * 1000
+    s_runtime = (monotonic() - s_start) * 1000
 
     return float(s_runtime)
 
