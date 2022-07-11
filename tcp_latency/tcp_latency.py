@@ -106,16 +106,13 @@ def latency_point(host: str, port: int = 443, timeout: float = 5) -> Optional[fl
     :rtype: Returns float if possible
     Calculate a latency point using sockets. If something bad happens the point returned is None
     '''
-    # New Socket and Time out
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(timeout)
 
     # Start a timer
     s_start = monotonic()
 
     # Try to Connect
     try:
-        s.connect((host, int(port)))
+        s = socket.create_connection((host,port), timeout = timeout)
         s.shutdown(socket.SHUT_RD)
 
     # If something bad happens, the latency_point is None
